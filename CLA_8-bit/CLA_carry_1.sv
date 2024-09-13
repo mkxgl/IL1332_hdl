@@ -1,9 +1,9 @@
 module CLA_carry_logic_1 
 (
   input logic g1,
+  input logic g0,
   input logic p1,
   input logic p0,
-  input logic g0,
   input logic carry_in_0,
   output logic carry_out
 );
