@@ -14,10 +14,11 @@ module CLA_carry_logic_4
   output logic carry_out
 );
 
-  logic nand1_out;  
-  logic nand2_out;
-	logic nand3_out;
-	logic nand4_out;
+  logic g4_inv;  
+  logic p4_nand_g3;
+	logic p4_nand_p3_nand_g2;
+	logic p4_nand_p3_nand_p2_nand_g1;
+	logic p4_nand_p3_nand_p2_nand_p1_nand_g0;
 
 nand2_delay u1 
 (
