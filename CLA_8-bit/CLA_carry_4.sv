@@ -67,7 +67,7 @@ nand6_delay u6
 	.c(p2),
 	.d(p1),
 	.e(p0),
-  .f(carry_in0),
+	.f(carry_in_0),
   .y(carry_out)
 ); 
 
