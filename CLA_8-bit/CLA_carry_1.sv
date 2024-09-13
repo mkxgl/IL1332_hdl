@@ -34,7 +34,7 @@ nand3_delay u3
 	.y(p1_nand_p0_nand_carry_in0)
 ); 
 
-nand_3 u4 
+nand3_delay u4 
 (
 	.a(g1_inv), 
 	.b(p1_nand_g0), 
