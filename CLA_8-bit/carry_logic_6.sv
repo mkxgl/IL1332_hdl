@@ -1,4 +1,4 @@
-module CLA_carry_logic_6
+module carry_logic_6
 (
   input logic g6,  
   input logic g5,
@@ -91,7 +91,7 @@ nand7_delay u7
   .y(p6_nand_p5_nand_p4_nand_p3_nand_p2_nand_p1_nand_g0)
 ); 
 
-nand8_delay u7
+nand8_delay u8
 (
   .a(p6), 
   .b(p5), 
@@ -104,7 +104,7 @@ nand8_delay u7
   .y(p6_nand_p5_nand_p4_nand_p3_nand_p2_nand_p1_nand_p0_nand_carry_in_0)
 ); 
 
-nand8_delay u8
+nand8_delay u9
 (
   .a(g6_inv), 
   .b(p6_nand_g5), 

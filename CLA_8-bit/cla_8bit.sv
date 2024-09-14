@@ -1,12 +1,12 @@
-module CLA_8bit
+module cla_8bit
 (
-	input logic [7:0] A,
-	input logic [7:0] B,
-	output logic [8:0] S
+	input logic signed [7:0] a,
+	input logic signed [7:0] b,
+	output logic signed [8:0] sum
 );
 
-	logic [7:0] P, G;
-	logic [8:0] C;
+	logic signed [7:0] P, G;
+	logic signed [8:0] C;
 
 	genvar i;
 	generate
@@ -14,8 +14,8 @@ module CLA_8bit
 			begin: generate_PL
 				propagate_logic pl
 				(
-					.a(A[i]),
-					.b(B[i]),
+					.a(a[i]),
+					.b(b[i]),
 					.p(P[i])
 				);
 			end
@@ -27,8 +27,8 @@ module CLA_8bit
 			begin: generate_GL
 				generate_logic gl
 				(
-					.a(A[j]),
-					.b(B[j]),
+					.a(a[j]),
+					.b(b[j]),
 					.g(G[j])
 				);
 			end
@@ -40,19 +40,25 @@ module CLA_8bit
 			begin: generate_SL
 				sum_logic sl
 				(
-					.a(A[k]),
-					.b(B[k]),
-					.carry_in(C[k])
-					.s(S[k])
+					.a(a[k]),
+					.b(b[k]),
+					.carry_in(C[k]),
+					.sum(sum[k])
 				);
 			end
 	endgenerate
+    sum_logic sl_8 (
+                    .a(a[7]), // sign extension
+                    .b(b[7]), // sign extension
+                    .carry_in(C[8]), // carry out from the fourth slice
+                    .sum(sum[8]) // sign extended 5th sum bit
+                );
 
 	// Slice 0
 	assign C[0] = 1'b0;
 
 	// Slice 1
-	CLA_carry_logic_0 cl0 
+	carry_logic_0 cl0 
 	(
 		.p0(P[0]), 
 		.g0(G[0]), 
@@ -61,18 +67,18 @@ module CLA_8bit
 	);
 
 	// Slice 2
-	CLA_carry_logic_1 cl1 
+	carry_logic_1 cl1 
 	(
 		.p0(P[0]),
 		.g0(G[0]),
 		.p1(P[1]),
 		.g1(G[1]),
-		.carry_in_0(C[1]),
+		.carry_in_0(1'b0),
 		.carry_out(C[2])
 	);
 
 	// Slice 3
-	CLA_carry_logic_2 cl2
+	carry_logic_2 cl2
 	(
 		.p0(P[0]),
 		.g0(G[0]),
@@ -80,12 +86,12 @@ module CLA_8bit
 		.g1(G[1]),
 		.p2(P[2]),
 		.g2(G[2]),
-		.carry_in_0(C[2]),
+		.carry_in_0(1'b0),
 		.carry_out(C[3])
 	);
 
 	// Slice 4
-	CLA_carry_logic_3 cl3 
+	carry_logic_3 cl3 
 	(
 		.p0(P[0]),
 		.g0(G[0]),
@@ -95,12 +101,12 @@ module CLA_8bit
 		.g2(G[2]),
 		.p3(P[3]),
 		.g3(G[3]),
-		.carry_in_0(C[3]),
+		.carry_in_0(1'b0),
 		.carry_out(C[4])
 	);
 
 	// Slice 5
-	CLA_carry_logic_4 cl4
+	carry_logic_4 cl4
 	(
 		.p0(P[0]),
 		.g0(G[0]),
@@ -112,13 +118,14 @@ module CLA_8bit
 		.g3(G[3]),
 		.p4(P[4]),
 		.g4(G[4]),
-		.carry_in_0(C[4]),
+		.carry_in_0(1'b0),
 		.carry_out(C[5])
 	);
 
 	// Slice 6
-	CLA_carry_logic_5 cl5 
+	carry_logic_5 cl5 
 	(
+		.p0(P[0]),
 		.g0(G[0]),
 		.p1(P[1]),
 		.g1(G[1]),
@@ -130,13 +137,14 @@ module CLA_8bit
 		.g4(G[4]),
 		.p5(P[5]),
 		.g5(G[5]),
-		.carry_in_0(C[5]),
+		.carry_in_0(1'b0),
 		.carry_out(C[6])
 	);
 
 	// Slice 7
-	CLA_carry_logic_6 cl6 
+	carry_logic_6 cl6 
 	(
+		.p0(P[0]),
 		.g0(G[0]),
 		.p1(P[1]),
 		.g1(G[1]),
@@ -150,13 +158,14 @@ module CLA_8bit
 		.g5(G[5]),
 		.p6(P[6]),
 		.g6(G[6]),
-		.carry_in_0(C[6]),
+		.carry_in_0(1'b0),
 		.carry_out(C[7])
 	);
 
 	// Slice 8 with sign extension
-	CLA_carry_logic_7 cl7 
+	carry_logic_7 cl7 
 	(
+		.p0(P[0]),
 		.g0(G[0]),
 		.p1(P[1]),
 		.g1(G[1]),
@@ -172,7 +181,7 @@ module CLA_8bit
 		.g6(G[6]),
 		.p7(P[7]),
 		.g7(G[7]),
-		.carry_in_0(C[7]),
+		.carry_in_0(1'b0),
 		.carry_out(C[8])
 	);
 
