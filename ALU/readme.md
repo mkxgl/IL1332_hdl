@@ -11,7 +11,7 @@ Output: unsigned 16-bit Z.
 Control signals: 2-bit S and M.
 
 ### The functions are as following:
-- S     M      Function        Function Category
+- S     M
 - 00                          Arithmetic
     -  00     ADD             
     - 01     SUB
