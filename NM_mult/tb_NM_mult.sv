@@ -27,32 +27,47 @@ module tb_mult_NMbit;
         // Test case 1
         A = 4'b0011; // 3
         B = 5'b00010; // 2
-        #10; // Wait for 10 time units
+        #100; // Wait for 10 time units
 
         // Test case 2
         A = 4'b0101; // 5
         B = 5'b00101; // 5
-        #10;
+        #100;
 
         // Test case 3
         A = 4'b1111; // 15
         B = 5'b00011; // 3
-        #10;
+        #100;
 
         // Test case 4
         A = 4'b1010; // 10
         B = 5'b00001; // 1
-        #10;
+        #100;
 
         // Test case 5
         A = 4'b0000; // 0
         B = 5'b11111; // 31
-        #10;
+        #100;
 
+	// Test case 6
+        A = 4'b1111; // -1
+        B = 5'b00001; // 1
+        #100;
+
+	
+	// Test case 7
+        A = 4'b1111; // -1
+        B = 5'b11111; // -1
+        #100;
+
+	// Test case 8
+        A = 4'b1011; // -5
+        B = 5'b11011; // -5
+        #100;
         // Add more test cases as needed
 
         // Finish simulation
-        $finish;
+        $stop;
     end
 
 endmodule
