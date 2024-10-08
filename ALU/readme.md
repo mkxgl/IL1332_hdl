@@ -10,7 +10,7 @@ Inputs: unsigned 8-bit X and Y.
 Output: unsigned 16-bit Z. 
 Control signals: 2-bit S and M.
 
-###The functions are defined by the following table:
+### The functions are defined by the following table:
   S     M      Function        Function Category
   00    00     ADD             Arithmetic
         01     SUB
