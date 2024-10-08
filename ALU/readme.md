@@ -11,24 +11,27 @@ Output: unsigned 16-bit Z.
 Control signals: 2-bit S and M.
 
 ### The functions are defined by the following table:
-  - S     M      Function        Function Category
-  - 00                          Arithmetic
+- S     M      Function        Function Category
+- 00                          Arithmetic
     -  00     ADD             
     - 01     SUB
     -  10     MULTIPLY
     - 11     UNUSED
-- 01      00     ROTATE RIGHT    Shift/Rotate
-     -   01     ROTATE LEFT
-      -  10     SHIFT RIGHT
-      -  11     SHIFT LEFT
-- 10      00     GREATER THAN    Compare
-     -   01     LESS THAN
-     -   10     EQUAL
-    -    11     NOT EQUAL
-- 11      00     AND            Logic
-     -   01     OR
-     -   10     NOT
-    -    11     XOR
+- 01  Shift/Rotate
+  - 00     ROTATE RIGHT    
+  -   01     ROTATE LEFT
+  -  10     SHIFT RIGHT
+  -  11     SHIFT LEFT
+- 10   Compare
+  - 00     GREATER THAN   
+  -   01     LESS THAN
+  -   10     EQUAL
+  -    11     NOT EQUAL
+- 11 Logic
+  - 00     AND           
+  -   01     OR
+  -   10     NOT
+  -    11     XOR
 
 ## Testbench Requirements:
 1. Create a testbench to verify the functionality of the ALU.
