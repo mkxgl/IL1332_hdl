@@ -9,10 +9,11 @@ ALU performs four types of functions: [Arithmetic operations](), [logic operatio
 Inputs: unsigned 8-bit X and Y. 
 Output: unsigned 16-bit Z. 
 Control signals: 2-bit S and M.
-
-### The functions are as following:
 - S
     -  M
+
+### The functions are as following:
+
 - 00                          Arithmetic
     -  00     ADD             
     - 01     SUB
