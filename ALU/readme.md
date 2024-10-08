@@ -14,9 +14,9 @@ Control signals: 2-bit S and M.
   - S     M      Function        Function Category
   - 00                          Arithmetic
     -  00     ADD             
-        - 01     SUB
-       -  10     MULTIPLY
-       - 11     UNUSED
+    - 01     SUB
+    -  10     MULTIPLY
+    - 11     UNUSED
 - 01      00     ROTATE RIGHT    Shift/Rotate
      -   01     ROTATE LEFT
       -  10     SHIFT RIGHT
