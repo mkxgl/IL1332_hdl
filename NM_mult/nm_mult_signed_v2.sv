@@ -31,7 +31,6 @@ always @(*) begin
 	end
 	else
 		A_positive = A;
-end
 // loop: if MSB A == 1: sign_A till unsigned_A 2s complement
 	if (sign_B == 1) begin
 		B_positive = ~B + 1;
