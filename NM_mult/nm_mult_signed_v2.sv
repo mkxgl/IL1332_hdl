@@ -10,6 +10,8 @@ logic [(M-2):0][(N-1):0] A_temp;
 logic [(M-2):0][(N-1):0] B_temp;
 logic [(M-2):0][(N-1):0] Sum;
 logic carry_out [(M-2):0];
+input logic [N-1:0] A_positive,
+input logic [M-1:0] B_positive,
 
 //sign bits of A and B inputs as well as axorb result
 logic sign_A;
@@ -25,11 +27,15 @@ assign sign_AxorB = sign_A ^ sign_B; // if this is 1, then the result will be ne
 // loop: if MSB A == 1: sign_A till unsigned_A 2s complement
 always @(*) begin
 	if (sign_A == 1) begin
-		A = ~A + 1;
-	end
+		A_positive = ~A + 1;
+	else
+		A_positive = A;
+end
 // loop: if MSB A == 1: sign_A till unsigned_A 2s complement
 	if (sign_B == 1) begin
-		B = ~B + 1;
+		B_positive = ~B + 1;
+	else
+		B_positive = B;
 	end
 end
 
@@ -41,8 +47,8 @@ generate
 
 		and2_delay u_and 
 		(
-			.b(B[x]),
-			.a(A[y]),
+			.b(B_positive[x]),
+			.a(A_positive[y]),
 			.y(prod_terms[x][y])
 		);
 		end
@@ -100,6 +106,6 @@ always @(*) begin
 	end
 	else
 		Prod = unsign_Prod; //If A xor B != 1, then unsigned product remains the same number
-	end
+end
 
 endmodule
