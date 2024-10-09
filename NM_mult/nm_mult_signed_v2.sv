@@ -8,22 +8,30 @@ module mult_NMbit #(parameter N=4, parameter M=5)
 logic [(M-1):0][(N-1):0] prod_terms; // mult matrix N x M
 logic [(M-2):0][(N-1):0] A_temp;
 logic [(M-2):0][(N-1):0] B_temp;
-logic [(M-2):0][(N-1):0]Sum;
+logic [(M-2):0][(N-1):0] Sum;
 logic carry_out [(M-2):0];
 
 //sign bits of A and B inputs as well as axorb result
 logic sign_A;
 logic sign_B;
 logic sign_AxorB; //this will be used for a xor b to check if exclusively one is neg
-logic signed [(N+M)-1:0] unsign_Prod; //product is unsigned
-
+logic [(N+M)-1:0] unsign_Prod; //product is unsigned
 
 //This is to check if A or B is negative, and then doing the xor operation
 assign sign_A = A[N-1];
 assign sign_B = B[M-1];
 assign sign_AxorB = sign_A ^ sign_B; // if this is 1, then the result will be neg
 
-
+// loop: if MSB A == 1: sign_A till unsigned_A 2s complement
+always @(*) begin
+	if (sign_A == 1) begin
+		A = ~A + 1;
+	end
+// loop: if MSB A == 1: sign_A till unsigned_A 2s complement
+	if (sign_B == 1) begin
+		B = ~B + 1;
+	end
+end
 
 // Generate block to create the four product terms
 genvar x, y;
@@ -88,7 +96,7 @@ assign Prod [(N+M)-1] = carry_out [M-2];
 //Now in the end, if A XOR B == 1, then we'll apply 2's complement to the result to make it neg
 always @(*) begin
 	if (sign_AxorB == 1) begin
-		Prod = ~(unsign_Prod + 1); // Two's complement if A xor B == 1
+		Prod = ~unsign_Prod + 1; // Two's complement if A xor B == 1
 	end
 	else
 		Prod = unsign_Prod; //If A xor B != 1, then unsigned product remains the same number
