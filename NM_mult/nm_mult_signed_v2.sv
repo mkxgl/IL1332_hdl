@@ -28,12 +28,14 @@ assign sign_AxorB = sign_A ^ sign_B; // if this is 1, then the result will be ne
 always @(*) begin
 	if (sign_A == 1) begin
 		A_positive = ~A + 1;
+	end
 	else
 		A_positive = A;
 end
 // loop: if MSB A == 1: sign_A till unsigned_A 2s complement
 	if (sign_B == 1) begin
 		B_positive = ~B + 1;
+	end
 	else
 		B_positive = B;
 	end
