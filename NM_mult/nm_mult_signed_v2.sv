@@ -10,8 +10,8 @@ logic [(M-2):0][(N-1):0] A_temp;
 logic [(M-2):0][(N-1):0] B_temp;
 logic [(M-2):0][(N-1):0] Sum;
 logic carry_out [(M-2):0];
-input logic [N-1:0] A_positive;
-input logic [M-1:0] B_positive;
+logic [N-1:0] A_positive;
+logic [M-1:0] B_positive;
 
 //sign bits of A and B inputs as well as axorb result
 logic sign_A;
@@ -37,7 +37,6 @@ always @(*) begin
 	end
 	else
 		B_positive = B;
-	end
 end
 
 // Generate block to create the four product terms
@@ -81,7 +80,7 @@ generate
 	for (k = 1; k < M-1; ++k) begin : RCA_loop
 		assign A_temp [k][N-1] = carry_out [k-1];
 		assign A_temp [k][(N-2):0] = Sum [k-1][(N-1):1];
-		assign Prod [k] = Sum [k-1][0];
+		assign unsign_Prod [k] = Sum [k-1][0];
 		assign B_temp [k]= prod_terms [k + 1];
 
 		rca_Nbit_co #(N) uk 
@@ -97,8 +96,8 @@ endgenerate
 
 //assign Prod[(N+M)-2:(M-1)] = Sum[M-1];
 //assign Prod[(N+M)-1] = carry_out[M-1];
-assign Prod [(N+M)-2:(M-1)] = Sum [M-2];
-assign Prod [(N+M)-1] = carry_out [M-2];
+assign unsign_Prod [(N+M)-2:(M-1)] = Sum [M-2];
+assign unsign_Prod [(N+M)-1] = carry_out [M-2];
 
 //Now in the end, if A XOR B == 1, then we'll apply 2's complement to the result to make it neg
 always @(*) begin
