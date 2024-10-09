@@ -10,8 +10,8 @@ logic [(M-2):0][(N-1):0] A_temp;
 logic [(M-2):0][(N-1):0] B_temp;
 logic [(M-2):0][(N-1):0] Sum;
 logic carry_out [(M-2):0];
-input logic [N-1:0] A_positive,
-input logic [M-1:0] B_positive,
+input logic [N-1:0] A_positive;
+input logic [M-1:0] B_positive;
 
 //sign bits of A and B inputs as well as axorb result
 logic sign_A;
