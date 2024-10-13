@@ -105,7 +105,7 @@ module logic_unit
 	        2'b01: z = {{8{or_result[7]}}, or_result};
 	        2'b10: z = {not_x, not_y};	// Concatenated NOT x with NOT y
 	        2'b11: z = {{8{xor_result[7]}}, xor_result};
-			default : z = 16'b0;
+		default : z = 16'b0;
 		endcase
 	end
 endmodule : logic_unit
