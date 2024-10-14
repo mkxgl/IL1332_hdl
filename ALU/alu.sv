@@ -14,32 +14,32 @@ module alu
 
     arithmetic_unit arithmetic 
     (
-        .X(x),
-        .Y(y),
+        .X(X),
+        .Y(Y),
         .m(m),
         .Z(arithmetic_result)
     );
 
     shifter_rotator_unit shifter 
     (
-        .X(x),
-        .Y(y),
+        .X(X),
+        .Y(Y),
         .m(m),
         .Z(shifter_result)
     );
 
     comparator_unit comparator 
     (
-        .X(x),
-        .Y(y),
+        .X(X),
+        .Y(Y),
         .m(m),
         .Z(comparator_result)
     );
 
     logic_unit logic_op 
     (
-        .X(x),
-        .Y(y),
+        .X(X),
+        .Y(Y),
         .m(m),
         .Z(logic_result)
     );
@@ -50,7 +50,7 @@ module alu
             2'b01: Z = shifter_result;
             2'b10: Z = comparator_result;
             2'b11: Z = logic_result;
-            default: z = 16'b0;
+            default: Z = 16'b0;
         endcase
     end
 endmodule
