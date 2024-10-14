@@ -1,0 +1,33 @@
+module tb_alu
+(
+  logic [7:0] X;
+  logic [7:0] Y;
+  logic [1:0] m; 
+  logic [1:0] s;
+  logic [15:0] Z;
+
+  alu uut 
+  (
+      .X(X),
+      .Y(Y),
+      .m(m),
+      .s(s),
+      .Z(Z)
+  );
+
+  initial begin
+        for (int i = 0; i < 10; ++i) begin // number of tests
+            x = $urandom_range(0, 255); // 255 is max in 8 bits unsigned
+            y = $urandom_range(0, 255);
+            m = $urandom_range(0, 3);
+            s = $urandom_range(0, 3);
+
+            // Apply inputs and wait for a short period
+            #10;
+            $display("X: %d, Y: %d, M: %b, S: %b => Z: %d", X, Y, m, s, Z);
+        end
+
+        // Finish the simulation
+        // $finish;
+    end
+endmodule
