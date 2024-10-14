@@ -17,7 +17,7 @@ module alu
         .X(X),
         .Y(Y),
         .m(m),
-        .Z(arithmetic_result)
+        .Z(arithmetic_result) // probably gotta use another name for the variable
     );
 
     shifter_rotator_unit shifter 
